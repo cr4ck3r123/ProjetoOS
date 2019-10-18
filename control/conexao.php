@@ -1,10 +1,11 @@
 <?php
 define("DB_SERVER", "localhost");
-define("DB_NAME", "db_site_php");
+define("DB_NAME", "administrador");
 define("DB_USER", "root");
 define("DB_PASS", "");
 class conexao
 {
+        
 public static function verifyCountry($id)
 {
 $dsn = "mysql:host=".DB_SERVER.";dbname=".DB_NAME.";charset=utf8mb4";
@@ -15,7 +16,7 @@ PDO::ATTR_EMULATE_PREPARES => true,
 ];
 try {
 $pdo = new PDO($dsn, DB_USER, DB_PASS, $opt);
-$stmt = $pdo->prepare("SELECT * FROM tb_user where id_user = :id");
+$stmt = $pdo->prepare("SELECT * FROM admin where id = :id");
 $stmt->execute(array('id_user' => $id ));
 $result = $stmt->fetch();
 } catch (PDOException $exception) {
