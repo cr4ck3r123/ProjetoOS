@@ -72,7 +72,7 @@ switch ($acao):
                 <td><?php echo $adm->admin_login ?></td>
                 <td><?php echo $adm->admin_nivel ?></td>
                 <td>
-                    <a href="#" class="btn btn-warning">Editar</a>
+                    <a href="#" class="btn btn-warning" id="btnEdit" data-id="<?php echo $adm->id ?>">Editar</a>
                     <a href="#" class="btn btn-danger">Excluir</a>
                 </td>
 
@@ -83,6 +83,52 @@ switch ($acao):
         else:
         endif;
 
+        break;
+        
+    case 'form_edit' : 
+        
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+        
+        $dados = pegaId($id);
+        
+        
+        ?>
+       <div class="retorno"></div>
+        <form method="POST" enctype="multipart/form-data" name="form_edit" action="">
+            <div class="form-group">
+                <label for="recipient-name" class="control-label">Nome:</label>
+                <input name="nome" type="text" value="<?php echo $dados->admin_nome ?>" class="form-control" placeholder="Digite seu nome">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputText" class="control-label">E-mail:</label>
+                <input name="email" type="email" value="<?php echo $dados->admin_email ?>" class="form-control" placeholder="Digite seu E-mail">
+            </div>
+            <div class="form-group">
+                <label for="recipient-name" class="control-label">Login:</label>
+                <input name="login" type="text" value="<?php echo $dados->admin_login ?>"  class="form-control" placeholder="Digite seu Login">
+            </div>
+                <div class="form-group">
+                <label for="recipient-name" class="control-label">Senha:</label>
+                <input name="senha" type="password" value="<?php echo $dados->admin_senha ?>" class="form-control" placeholder="Digite sua Senha">
+            </div>
+            <div class="form-group">
+                <label for="recipient-name" class="control-label">Repita a senha:</label>
+                <input name="re_senha" type="password" value="<?php echo $dados->admin_senha ?>" class="form-control" placeholder="Confirme sua senha">
+            </div>
+            <label for="recipient-name" class="control-label">Nivel:</label><br>
+            <select name="nivel" value="<?php echo $dados->admin_nivel ?>"class="form-control" placeholder="Escolha a opção">
+                <option value="1">Administrador</option> 
+                <option value="2">Moderador</option>
+            </select>
+         
+            <div class="modal-footer">
+                <img src="../img/350.gif" class="load" alt="Carregando" style="display: none">
+                <button type="submit" name="submit" class="btn btn-success">Atualizar</button>
+            </div>
+                       
+        </form>
+        
+        <?php
         break;
     default :
         echo 'erro inexistente!';

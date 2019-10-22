@@ -83,6 +83,10 @@ endif;
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td><img src="../img/244.gif" class="load" alt="Carregando"></td>
+                                    </tr>
+                                    
                                 <!--    <tr>
                                         <td>SEU NOME</td>
                                         <td>email@email.com</td>

@@ -25,9 +25,8 @@
        }
        
        //FUNÇÃO LISTAR
-       function listarAdmin(){
-           
-              $pdo = conecta();
+       function listarAdmin(){           
+        $pdo = conecta();
     try {
         $listar = $pdo->query("select * from admin");
        
@@ -46,4 +45,50 @@
            
            
        }
+       
+       //FUNÇÃO DELETAR
+       function pegaId($id){
+           
+              $pdo = conecta();
+    try {
+        $pegaId = $pdo->prepare("SELECT * FROM admin WHERE id = ?");
+       
+        $pegaId->bindValue(1, $id, PDO::PARAM_INT);
+        $pegaId->execute();
+        
+        if ($pegaId->rowCount() > 0):           
+            return $pegaId->fetch(PDO::FETCH_OBJ);
+        else :            
+            return FALSE;
+        endif;
+    } catch (PDOException $exc) {
+        echo $exc->getMessage();
+    }
+           
+           
+       }
+       
+           //FUNÇÃO ATUALIZA
+    function atualizar($nome, $login, $email){
+                  $pdo = conecta();
+    try {
+        $atualizar = $pdo->prepare("UPDATE admin SET admin_nome = ?, admin_email = ?, admin_login = ? WHERE id = ?");
+        $atualizar->bindValue(1, $nome, PDO::PARAM_STR);
+        $atualizar->bindValue(2, $email, PDO::PARAM_STR);
+        $atualizar->bindValue(3, $login, PDO::PARAM_STR);
+        $atualizar->bindValue(4, $id, PDO::PARAM_INT);
+        $atualizar->execute();
+        
+        if ($atualizar->rowCount() == 1):           
+            return TRUE;
+        else :            
+            return FALSE;
+        endif;
+    } catch (PDOException $exc) {
+        echo $exc->getMessage();
+    }
+        
+        
+        
+    }
 

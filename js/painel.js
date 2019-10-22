@@ -35,18 +35,18 @@ $(document).ready(function () {
                 console.log(retorno);
                 botao.attr('disabled', false);
                 $('.load').fadeOut('slow');
-                
-                if(retorno === 'senhainval'){
-                     swal({
+
+                if (retorno === 'senhainval') {
+                    swal({
                         position: 'top-center',
                         type: 'error',
                         title: 'Senhas não conferem!',
                         showConfirmButton: false,
                         timer: 2000
                     })
-                
+
                 } else if (retorno === 'cadastrou') {
-                    
+
                     swal({
                         position: 'top-center',
                         type: 'success',
@@ -58,7 +58,7 @@ $(document).ready(function () {
                         $('#myModalLabel').modal('hide')
                         window.location.reload();
                     }, 2000);
-                    
+
                 } else {
                     swal({
                         position: 'top-center',
@@ -67,26 +67,41 @@ $(document).ready(function () {
                         showConfirmButton: false,
                         timer: 1000
                     })
-
                 }
-                                  
             }
         });
         return false;
     });
-    
-    
-    // FUNÇÕES GERAL
-       function listarAdmin(url, acao){           
-           $.post(url, {acao: acao}, function(retorno){
-               var tbody = $('.table').find('tbody');
-               tbody.html(retorno);
-           });           
-       }
-       
-       listarAdmin('../ajax/controller.php', 'listar_admin');
-       
 
+    //FUNÇÃO PEGA ID
+    $('.table').on("click", '#btnEdit', function () {
+        var id = $(this).attr('data-id');
+
+        $.post('../ajax/controller.php', {acao: 'form_edit', id: id}, function (retorno) {
+            $('#myModalLabel').modal({backdrop: 'static'});
+            conteudo.html(retorno);
+        });
+        return false;
+    });
+    
+    //FUNÇÃO ATUALIZA
+    $('#myModalLabel').on("submit", 'form[name="form_edit"]', function(){
+       alert('clicou');
+        return false;
+    });    
+
+    // FUNÇÕES GERAL
+    function listarAdmin(url, acao) {
+        $.post(url, {acao: acao}, function (retorno) {
+            var tbody = $('.table').find('tbody');
+            var load = tbody.find('.load');
+            load.fadeOut('slow', function () {
+                tbody.html(retorno);
+            })
+        });
+    }
+
+    listarAdmin('../ajax/controller.php', 'listar_admin');
 });
 
 

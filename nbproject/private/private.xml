@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/ProjetoOS/funcoes/crud/crud.php</file>
             <file>file:/C:/xampp/htdocs/ProjetoOS/ajax/controller.php</file>
-            <file>file:/C:/xampp/htdocs/ProjetoOS/js/custom.js</file>
-            <file>file:/C:/xampp/htdocs/ProjetoOS/view/login.php</file>
-            <file>file:/C:/xampp/htdocs/ProjetoOS/funcoes/login/login.php</file>
+            <file>file:/C:/xampp/htdocs/ProjetoOS/ajax/painel.php</file>
+            <file>file:/C:/xampp/htdocs/ProjetoOS/view/painel.php</file>
+            <file>file:/C:/xampp/htdocs/ProjetoOS/js/painel.js</file>
         </group>
     </open-files>
 </project-private>
