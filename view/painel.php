@@ -1,3 +1,22 @@
+<?php
+ob_start();
+session_start();
+require '../funcoes/banco/conexao.php';
+require '../funcoes/login/login.php';
+
+
+logado($_SESSION['administrador']);
+
+if (isset($_GET['logout']) && $_GET['logout'] == 'true'):
+    session_destroy();
+    header("Location: login.php");
+endif;
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,16 +24,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="../css/estilos.css" rel="stylesheet" media="screen">
-               
-        <!------ CSS ---------->
-        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
-        <!-- libs -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-        <script src="../js/script.js" type="text/javascript"></script> 
 
-        <!-- libs jquery  -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="../js/custom.js" type="text/javascript"></script>
+
 
     </head>
     <body>
@@ -39,14 +50,14 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Cadastrar</a></li>
+                                <li><a href="#" class="list-group-item" id="janelax">Cadastrar</a></li>
                             </ul>
                         </li>
                     </ul>
 
                     <p class="pull-right logout">
-                        Bem Vindo: SEU NOME &nbsp
-                        <a href="#" class="btn btn-danger">Sair</a>
+                        Bem Vindo: <?php echo $_SESSION['administrador']->admin_login; ?> &nbsp
+                        <a href="?logout=true" class="btn btn-danger">Sair</a>
                     </p>
 
                 </div><!-- /.navbar-collapse -->
@@ -72,7 +83,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <!--    <tr>
                                         <td>SEU NOME</td>
                                         <td>email@email.com</td>
                                         <td>LOGIN</td>
@@ -83,56 +94,7 @@
                                         </td>
 
                                     </tr>
-                                    <tr>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        <td>@jdoe</td>
-                                        <td>admn</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning">Editar</a>
-                                            <a href="#" class="btn btn-danger">Excluir</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Matt</td>
-                                        <td>Armon</td>
-                                        <td>@marmon</td>
-                                        <td>admn</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning">Editar</a>
-                                            <a href="#" class="btn btn-danger">Excluir</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jane</td>
-                                        <td>Kowalsky</td>
-                                        <td>@jane-kow</td>
-                                        <td>admn</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning">Editar</a>
-                                            <a href="#" class="btn btn-danger">Excluir</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tim</td>
-                                        <td>Pacey</td>
-                                        <td>@t-pac</td>
-                                        <td>admn</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning">Editar</a>
-                                            <a href="#" class="btn btn-danger">Excluir</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Steve</td>
-                                        <td>Rovinsky</td>
-                                        <td>@steve-sky</td>
-                                        <td>admn</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning">Editar</a>
-                                            <a href="#" class="btn btn-danger">Excluir</a>
-                                        </td>
-                                    </tr>
+                                         -->                                                    
                                 </tbody>
                             </table>
                         </div>
@@ -153,11 +115,38 @@
 
                         <div class="list-group">
                             <a href="#" class="list-group-item active">Administrador</a>
-                            <a href="#" class="list-group-item">Cadastrar</a>
+                            <a href="#" class="list-group-item" id="janela">Cadastrar</a>
+                          
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!--------------------------------------------- LIBS -------------------------------------------------------------------------> 
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="../js/bootstrap.min.js"></script>
+            <script src="../js/painel.js"></script>
+
+            <!---------------------------------------------  INICIO DO MODAL ------------------------------------------------------------->
+           
+            <div class="modal fade" id="myModalLabel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title text-center" id="myModalLabel">Cadastrar Usuário</h4>
+                        </div>
+                        <div class="modal-body">
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>   
+            
+            <!----------------------------------------------- FIM DO MODAL ------------------------------------------------------------->
         </div>
+           
+                </div>              
     </body>
 </html>
+<?php ob_end_flush(); ?>

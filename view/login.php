@@ -15,6 +15,16 @@
 session_start();
 require '../funcoes/banco/conexao.php';
 conecta();
+/*
+echo "<pre>";
+
+print_r($_SESSION['administrador']);
+
+echo "</pre>";
+
+echo "<br>";
+*/
+
 ?>
 
 

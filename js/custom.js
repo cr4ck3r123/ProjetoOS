@@ -14,11 +14,11 @@ $(document).ready(function () {
                 $('.load').fadeIn('slow');
             },
             success: function (retorno) {
+                console.log(retorno);
                 $('.load').fadeOut('slow', function(){
                    botao.attr('disabled', false); 
-                });
+                });                
                 
-                console.log(retorno);
                 if (retorno === 'diffpass') {
                     swal({
                         type: 'error',
@@ -28,7 +28,7 @@ $(document).ready(function () {
                     // msg('Senha ou Usuario inválido', 'erro');
                 } else if (retorno === 'noif') {
                     swal({
-                        type: 'success',
+                        type: 'error',
                         title: 'ops...',
                         text: 'usuario ou senha invalidos',
                     });
@@ -38,7 +38,7 @@ $(document).ready(function () {
                         type: 'success',
                         title: 'Logado com sucesso!',
                         showConfirmButton: false,
-                        timer: 1000
+                        timer: 1000                        
                     })
                     
 //                    forma.fadeOut('last', function(){
@@ -47,7 +47,6 @@ $(document).ready(function () {
                 setTimeout(function(){
                     $(location).attr('href', '../view/painel.php');
                 },2000);
-
                     
                 }
             },

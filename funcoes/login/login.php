@@ -9,9 +9,9 @@ function login($login, $senha) {
         $logar->bindValue(2, $senha, PDO::PARAM_STR);
         $logar->execute();
 
-        if ($logar->rowCount() == 1):
+        if ($logar->rowCount() == 1):           
             return TRUE;
-        else :
+        else :            
             return FALSE;
         endif;
     } catch (PDOException $exc) {
@@ -35,4 +35,18 @@ function pegaLogin($login) {
     } catch (PDOException $exc) {
         echo $exc->getMessage();
     }
+}
+
+
+// ADMINISTRADOR LOGADO
+function logado($sessao){
+   
+    if($sessao == null || !isset($sessao)):
+              header("Location: login.php");
+              echo 'chegou aki 1';
+        else:
+            //  echo 'chegou aki 2';
+          
+        return TRUE;
+    endif;   
 }
