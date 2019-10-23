@@ -1,5 +1,4 @@
 <?php
-
 sleep(1);
 ob_start();
 session_start();
@@ -61,39 +60,45 @@ switch ($acao):
         break;
 
     case 'listar_admin':
+
         if (listarAdmin()):
-          $admin = listarAdmin();
-          foreach ($admin as $adm):
-            ?>
+            $admin = listarAdmin();
+            foreach ($admin as $adm):
+                ?>
+                <form>
+                    <table class="table table-striped">
+                        <tr>
+                            <td><?php echo $adm->admin_nome ?></td>
+                            <td><?php echo $adm->admin_email ?></td>
+                            <td><?php echo $adm->admin_login ?></td>
+                            <td><?php echo $adm->admin_nivel ?></td>
+                            <td>
+                                <a href="#" class="btn btn-warning" id="btnEdit" data-id="<?php echo $adm->id ?>">Editar</a>
+                                <a href="#" class="btn btn-danger" id="btnExcluir" data-id="<?php echo $adm->id ?>">Excluir</a>
+                            </td>
 
-            <tr>
-                <td><?php echo $adm->admin_nome ?></td>
-                <td><?php echo $adm->admin_email ?></td>
-                <td><?php echo $adm->admin_login ?></td>
-                <td><?php echo $adm->admin_nivel ?></td>
-                <td>
-                    <a href="#" class="btn btn-warning" id="btnEdit" data-id="<?php echo $adm->id ?>">Editar</a>
-                    <a href="#" class="btn btn-danger">Excluir</a>
-                </td>
+                        </tr>
+                    </table>              
+                </form>
+                <?php
+            endforeach;
 
-            </tr>
-
-        <?php
-        endforeach;
         else:
         endif;
 
         break;
-        
-    case 'form_edit' : 
-        
+
+    case 'form_edit' :
+
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-        
+
         $dados = pegaId($id);
-        
-        
         ?>
-       <div class="retorno"></div>
+        <!-- libs -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+        <script src="../js/script.js" type="text/javascript"></script> 
+
+        <div class="retorno"></div>
         <form method="POST" enctype="multipart/form-data" name="form_edit" action="">
             <div class="form-group">
                 <label for="recipient-name" class="control-label">Nome:</label>
@@ -107,7 +112,7 @@ switch ($acao):
                 <label for="recipient-name" class="control-label">Login:</label>
                 <input name="login" type="text" value="<?php echo $dados->admin_login ?>"  class="form-control" placeholder="Digite seu Login">
             </div>
-                <div class="form-group">
+            <div class="form-group">
                 <label for="recipient-name" class="control-label">Senha:</label>
                 <input name="senha" type="password" value="<?php echo $dados->admin_senha ?>" class="form-control" placeholder="Digite sua Senha">
             </div>
@@ -120,16 +125,44 @@ switch ($acao):
                 <option value="1">Administrador</option> 
                 <option value="2">Moderador</option>
             </select>
-         
+            <input type="hidden" name="id" value="<?php echo $dados->id ?>" />
             <div class="modal-footer">
                 <img src="../img/350.gif" class="load" alt="Carregando" style="display: none">
                 <button type="submit" name="submit" class="btn btn-success">Atualizar</button>
             </div>
-                       
+
         </form>
-        
+
         <?php
         break;
+
+    case 'edit':
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+        $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
+        $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
+        $nivel = filter_input(INPUT_POST, 'nivel', FILTER_SANITIZE_STRING);
+
+        if (atualizar($nome, $login, $email, $id)):
+            echo "atualizou";
+        else:
+            echo "erro";
+        endif;
+
+        break;
+
+
+    case 'excluir':
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+        if (delete($id)):
+            echo "deletou";
+        endif;
+
+
+        break;
+
     default :
         echo 'erro inexistente!';
         break;

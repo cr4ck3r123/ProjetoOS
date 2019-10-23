@@ -86,19 +86,7 @@ endif;
                                     <tr>
                                         <td><img src="../img/244.gif" class="load" alt="Carregando"></td>
                                     </tr>
-                                    
-                                <!--    <tr>
-                                        <td>SEU NOME</td>
-                                        <td>email@email.com</td>
-                                        <td>LOGIN</td>
-                                        <td>admn</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning">Editar</a>
-                                            <a href="#" class="btn btn-danger">Excluir</a>
-                                        </td>
-
-                                    </tr>
-                                         -->                                                    
+                                                                            
                                 </tbody>
                             </table>
                         </div>
